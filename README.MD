@@ -27,20 +27,11 @@ This system processes over 1.5M Amazon product reviews across multiple categorie
 ## System Architecture
 
 ### Data Pipeline
-1. **Data Ingestion** (`data_ingestion.py`): Streams and processes gzipped Amazon review files
-2. **Metadata Processing** (`metadata_processing.py`): Extracts product metadata and category information
-3. **Data Cleaning** (`data_preprocessing.ipynb`): Handles duplicates, missing values, and data validation
-4. **Feature Engineering**: Creates interaction matrices and user/item encodings
-
-### Recommendation Engine
-```python
-def get_smart_recommendations(user_id, df, mf_model, user_to_idx, idx_to_item, 
-                            interaction_matrix, n_recommendations=10):
-    # 1. Analyze user history and primary categories
-    # 2. Attempt collaborative filtering with confidence check
-    # 3. Fallback to category-based recommendations if needed
-    # 4. Final fallback to popularity-based recommendations
-```
+1. **Data Ingestion** (`load_review.py`): Streams and processes gzipped Amazon review files
+2. **Metadata Processing** (`load_meta.py`): Extracts product metadata and category information
+3. **Data Cleaning** (`Data_Cleaning_Preprocessing.ipynb`): Handles duplicates, missing values, and data validation
+4. **Data Exploration** ('EDA.ipynb): Explores the data through various charts and manipulations
+5. **Model Building** ('model_development.ipynb'): Ensembles two models: Matrix Factorization(Fallback Popularity model) and Content-Based
 
 ### Model Components
 
@@ -98,9 +89,8 @@ This repository contains Jupyter notebooks and Python scripts documenting the co
 
 1. **Extreme Sparsity**: Hybrid approach with intelligent fallbacks
 2. **Cold Start Problem**: Category analysis and popularity recommendations
-3. **Scalability**: Chunked model storage using Git LFS for large pickle files
-4. **Data Quality**: Robust cleaning pipeline handling duplicates and missing values
-5. **Category Imbalance**: Weighted sampling and category-specific models
+3. **Data Quality**: Robust cleaning pipeline handling duplicates and missing values
+4. **Category Imbalance**: Weighted sampling and category-specific models
 
 
 ## Future Enhancements
@@ -112,23 +102,3 @@ This repository contains Jupyter notebooks and Python scripts documenting the co
 - **Multi-armed Bandit**: Optimize exploration vs exploitation
 - **Cross-category Recommendations**: Leverage category relationships
 
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes with appropriate tests
-4. Submit a pull request
-
-## License
-
-This project is licensed under the MIT License - see LICENSE file for details.
-
-## Acknowledgments
-
-- Amazon Product Data (2023): Dataset source
-- PostgreSQL: Database backend
-- Git LFS: Large file storage for model persistence
-
----
-
-**Note**: This system is designed for educational and research purposes. Ensure compliance with data usage policies when implementing in production environments.
